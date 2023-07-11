@@ -20,7 +20,7 @@ class CpuCollection
      */
     findCpuById(_id)
     {
-        let cpu = {};
+        let cpu = this.data.find(obj => obj.id == _id);
 
         // implémenter ici la recherche d'un CPU par son identifiant
 
@@ -29,6 +29,22 @@ class CpuCollection
 
     addCpu(_newCpu)
     {
+        if(Number.isInteger(_newCpu.price) && typeof _newCpu.brand === 'string')
+        {
+            let highestNumber = 0;
+            for(let data of this.data)
+            {
+                if(data.id > highestNumber)
+                {
+                    console.log(data.id);
+                    highestNumber = data.id;
+                }
+            }
+            highestNumber++;
+            _newCpu.id = highestNumber;
+
+            this.data.push(_newCpu);
+        }
         // implémenter ici l'ajout d'un CPU dans la collection 'this.data' puis retourner le nouveau CPU ajouté
         // Pensez à générer un nouvel identifiant pour le nouveau CPU
 
